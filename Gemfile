@@ -16,6 +16,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap-sass', '3.4.1'
 gem 'image_processing', '~> 1.2'
+gem 'faker', '~> 2.14'
+gem 'will_paginate', '~> 3.3'
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.2'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
