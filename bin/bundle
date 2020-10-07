@@ -98,7 +98,7 @@ m = Module.new do
       require 'bundler/version'
     end
     if require_error.nil? && Gem::Requirement.new(bundler_requirement)
-                                 .satisfied_by?(Gem::Version.new(Bundler::VERSION))
+                                             .satisfied_by?(Gem::Version.new(Bundler::VERSION))
       return
     end
 
