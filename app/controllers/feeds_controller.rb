@@ -3,7 +3,6 @@
 class FeedsController < ApplicationController
   def index
     @user = current_user
-    @feed = @user.feeds.build
   end
 
   def show
@@ -13,8 +12,8 @@ class FeedsController < ApplicationController
   end
 
   def create
-    xml = SimpleRSS.parse open(params[:feed][:link])
-    @feed = current_user.feeds.build(feed_params.merge(rss: xml.to_json))
+    xml = RSS::Parser.parse(open(params[:link])).to_json
+    @feed = current_user.feeds.build(title: params[:title], link: params[:link], rss: xml)
     if @feed.save
       flash[:success] = 'You are add new feed, my congratulations!'
     else
@@ -32,22 +31,8 @@ class FeedsController < ApplicationController
   def update
     @feed = current_user.feeds.find_by_id(params[:id])
     @feed.update(rss: '')
-    xml = SimpleRSS.parse open(@feed.link)
-    @feed.update(rss: xml.to_json)
+    xml = RSS::Parser.parse(open(@feed.link)).to_json
+    @feed.update(rss: xml)
     redirect_to @feed
-  end
-
-  def update_all_feeds
-    feeds = Feed.all
-    feeds.each do |feed|
-      xml = SimpleRSS.parse open(feed.link)
-      feed.update(rss: xml.to_json)
-    end
-  end
-
-  private
-
-  def feed_params
-    params.require(:feed).permit(:title, :link)
   end
 end

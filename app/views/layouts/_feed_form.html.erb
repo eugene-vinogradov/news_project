@@ -1,5 +1,4 @@
 <%= form_with(model: @feed, local: true) do |f| %>
-  <%= render 'layouts/error_messages', object: @feed %>
 
   <%= f.label :title %>
   <%= f.text_field :title, class: 'form-control' %>
