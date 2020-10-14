@@ -1,0 +1,10 @@
+<%= form_with(model: @feed, local: true) do |f| %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <%= f.label :link %>
+  <%= f.text_area :link, placeholder: "Paste new link", class: 'form-control' %>
+
+  <%= f.submit 'Add rss feed', class: "btn btn-primary" %>
+<% end %>

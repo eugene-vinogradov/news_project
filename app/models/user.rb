@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :feeds, dependent: :destroy
+
   before_save { email.downcase! }
   validates :name, presence: true,
                    length: { maximum: 50 }

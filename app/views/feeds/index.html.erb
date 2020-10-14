@@ -1,0 +1,33 @@
+<% provide(:title, "All feeds by #{@user.name}") %>
+<%= render 'layouts/feed_form' %>
+
+<div>
+
+  <% if @user.feeds.count > 0 %>
+
+    <h3>Feeds (<%= @user.feeds.count %>)</h3>
+    <ol class="microposts">
+
+      <% @user.feeds.each do |feed| %>
+        <li>
+          <span class="user"><%= feed.title %></span>
+          <span class="content"><%= feed.link %></span>
+          <span class="content pull-right">
+            <span><%= link_to "Show news",
+                                              feed,
+                                              method: :get,
+                                              class: "action btn btn-primary" %>
+            </span>
+            <span><%= link_to "Delete feed",
+                                              feed,
+                                              method: :delete,
+                                              data: { confirm: "You sure?" },
+                                              class: "btn btn-danger" %>
+            </span>
+          </span>
+        </li>
+      <% end %>
+
+    </ol>
+  <% end %>
+</div>

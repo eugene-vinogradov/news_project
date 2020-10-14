@@ -1,0 +1,22 @@
+<% provide(:title, @feed.title) %>
+<% if @rss.any? %>
+  <h1><%= @rss['channel']['title'] %></h1>
+  <h2><%= link_to @rss['channel']['link'], @rss['channel']['link'] %></h2>
+  <h2>
+    Last update <%= @feed.updated_at %>
+    <%= button_to 'Update feed', feed_path, method: :patch, class: "btn btn-primary update-btn" %>
+  </h2>
+
+  <p<%= @rss['channel']['description'] %></p>
+  <ul>
+    <% @rss['channel']['item'].each do |item| %>
+      <% obj =  OpenStruct.new(item) %>
+      <li>
+        <%= link_to obj.title, obj.link %>
+        <p><%= obj.description %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h2>Sorry, something wrong</h2>
+<% end %>
