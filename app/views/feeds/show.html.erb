@@ -3,7 +3,7 @@
   <h1><%= @rss['channel']['title'] %></h1>
   <h2><%= link_to @rss['channel']['link'], @rss['channel']['link'] %></h2>
   <h2>
-    Last update <%= @feed.updated_at %>
+    Last update <%= @feed.update_rss_at %>
     <%= button_to 'Update feed', feed_path, method: :patch, class: "btn btn-primary update-btn" %>
   </h2>
 
